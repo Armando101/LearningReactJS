@@ -1,5 +1,5 @@
 // const element = document.createElement('h1');
-// element.innerText = 'Hello, Platzi Badges!';
+// element.innerHTML = 'Hello, Platzi Badges';
 
 // const container = document.getElementById('app');
 
@@ -8,9 +8,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const element = <h1>Hello, Platzi Badges!</h1>;
+const element = <h1>Hello, Platzi Badges form React</h1>
 
 const container = document.getElementById('app');
 
-// ReactDOM.render(__qué__, __dónde__);
-ReactDOM.render(element, container);
+// ReactDOM Recibe dos argumentos
+// Qué es lo que va a meter y donde lo va a meter, esto es, 
+// Un nodo y un contendedor
+ReactDOM.render(element, container)
