@@ -16,7 +16,7 @@ class Badge extends React.Component {
           <p>{this.props.jobTitle}</p>
         </div>
         <div className="badge_footer">
-          @{this.props.contact}
+          @{this.props.twitter}
         </div>
       </div>
   }
