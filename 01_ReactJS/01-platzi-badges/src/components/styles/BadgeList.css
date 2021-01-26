@@ -1,0 +1,25 @@
+p {
+  margin: 0px;
+}
+
+.badge {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  background: white;
+  box-shadow: 1px 1px 5px 0px;
+}
+
+.badge__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+
+.badge__twitter {
+  color: rgba(29,161,242,1.00);
+}
+
+.badgeList-info {
+  margin-left: 30px;
+}
