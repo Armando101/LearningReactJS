@@ -2,12 +2,13 @@ p {
   margin: 0px;
 }
 
-.badge {
+.badge__card {
   display: flex;
   margin-bottom: 20px;
   align-items: center;
   background: white;
   box-shadow: 1px 1px 5px 0px;
+  border-radius: 10px;
 }
 
 .badge__avatar {
