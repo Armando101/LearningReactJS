@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Gravatar from './Gravatar';
 import './styles/BadgeList.css';
 
 export class BadgesList extends Component {
@@ -19,7 +20,7 @@ export class BadgesList extends Component {
           // Para saber en si el elemento cambia de estado
           return (
             <div className="badge__card" key={badge.id}>
-              <img className="badge__avatar" src={badge.avatarUrl} alt={badge.twitter}/>
+              <Gravatar className="badge__avatar" email={badge.email}/>
               <div className="badgeList-info">
                 <p className="badgeList-info">{badge.firstName} {badge.lastName}</p>
                 <p className="badge__twitter">@{badge.twitter}</p>

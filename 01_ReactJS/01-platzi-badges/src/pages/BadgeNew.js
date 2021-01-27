@@ -4,9 +4,15 @@ import logo from '../images/badge-header.svg';
 import Badge from "../components/Badge";
 import avatar from '../images/avatar.jpg';
 import BadgeForm from '../components/BadgeForm';
-
+import api from '../api';
 class BadgeNew extends React.Component {
-  state = { form: {} };
+  state = { form: {
+    firstName: '',
+    lastName: '',
+    twitter: '',
+    jobTitle: '',
+    email: ''
+  } };
   handleChange = event => {
     this.setState({
       form: {
@@ -16,6 +22,27 @@ class BadgeNew extends React.Component {
     });
   }
 
+  handleSubmit = async event => {
+    event.preventDefault();
+    this.setState({
+      loading: true,
+      error: null
+    });
+
+    try {
+      await api.badges.create(this.state.form);
+      this.setState({
+        loading: false,
+        error: null
+      });
+    } catch (error) {
+      this.setState({
+        loading: false,
+        error
+      });
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -23,18 +50,19 @@ class BadgeNew extends React.Component {
           <img src={logo} alt="Logo" className="img-fluid"/>
         </div>
 
-        <div className="contai">
+        <div className="container">
           <div className="row">
             <div className="col-6">
               <Badge
-                firstName={this.state.form.firstName}
-                lastName={this.state.form.lastName}
-                twitter={this.state.form.twitter}
-                jobTitle={this.state.form.jobTitle}
+                firstName={this.state.form.firstName || 'FIRST_NAME'}
+                lastName={this.state.form.lastName || 'LAST_NAME'}
+                twitter={this.state.form.twitter || 'twitter'}
+                jobTitle={this.state.form.jobTitle || 'JOB_TITLE'}
+                email={this.state.form.email || ''}
                 avatar={avatar}/>
             </div>
             <div className="col-6">
-              <BadgeForm onChange={this.handleChange} formValues={this.state.form}/>
+              <BadgeForm onSubmit={this.handleSubmit} onChange={this.handleChange} formValues={this.state.form}/>
             </div>
           </div>
         </div>

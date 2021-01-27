@@ -1,6 +1,7 @@
 import React from 'react'; // Importante para usar RXJS
 import './styles/Badge.css';
 import confLogo from '../images/badge-header.svg';
+import Gravatar from './Gravatar';
 
 class Badge extends React.Component {
   render() {
@@ -9,7 +10,8 @@ class Badge extends React.Component {
           <img src={ confLogo } alt="Logo de la conferencia"/>
         </div>
         <div className="badge_section-name">
-          <img className="badge_avatar" src={this.props.avatar} alt="Avatar"/>
+          <Gravatar className="badge_avatar" email={this.props.email}/>
+          {/* <img className="badge_avatar" src={this.props.avatar} alt="Avatar"/> */}
           <h1>{this.props.firstName} <br/> {this.props.lastName} </h1>
         </div>
         <div className="badge_section-info">
