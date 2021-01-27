@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 import api from '../api';
 import PageLoading from '../components/PageLoading';
 import PageError from '../components/PageError';
+import MiniLoader from '../components/MiniLoader'
 
 export class Badges extends Component {
-  timeoutId;
+  timerIntervalID;
   constructor(props) {
     super(props)
 
@@ -21,21 +22,14 @@ export class Badges extends Component {
 
   componentDidMount() {
     this.fetchData()
+    this.timerIntervalID = setInterval(this.fetchData, 3000);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // console.log({
-    //   prevProps,
-    //   prevState
-    // });
-
-    // console.log({
-    //   props: this.props,
-    //   state: this.state
-    // });
+  componentDidUpdate() {
   }
 
   componentWillUnmount() {
+    clearInterval(this.timerIntervalID);
   }
 
   fetchData = async () => {
@@ -51,7 +45,7 @@ export class Badges extends Component {
   }
 
   render() {
-    if (this.state.loading === true) {
+    if (this.state.loading === true && !this.state.data) {
       return <PageLoading/>;
     }
 
@@ -76,6 +70,7 @@ export class Badges extends Component {
         <div className="Badges__list">
           <div className="Badges__container">
             <BadgesList badges={this.state.data}/>
+            {this.state.loading && <MiniLoader/>}
           </div>
         </div>
       </React.Fragment>
