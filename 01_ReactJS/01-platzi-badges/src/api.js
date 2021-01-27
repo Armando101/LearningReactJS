@@ -32,11 +32,14 @@ const api = {
 
       // Simulando error de 500
       // throw new Error('500: Server Error');
-
+      
       // Todo salió correctamente
       return callApi('/badges');
     },
-    create(badge) {
+    create(badge) {    
+      // Simulando error de 500
+      // throw new Error('500: Server Error');
+  
       return callApi(`/badges`, {
         method: 'POST',
         body: JSON.stringify(badge),

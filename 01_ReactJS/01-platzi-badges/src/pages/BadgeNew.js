@@ -4,15 +4,20 @@ import logo from '../images/badge-header.svg';
 import Badge from "../components/Badge";
 import avatar from '../images/avatar.jpg';
 import BadgeForm from '../components/BadgeForm';
+import PageLoading from '../components/PageLoading';
 import api from '../api';
 class BadgeNew extends React.Component {
-  state = { form: {
-    firstName: '',
-    lastName: '',
-    twitter: '',
-    jobTitle: '',
-    email: ''
-  } };
+  state = {
+    loading: false,
+    error: null,
+    form: {
+      firstName: '',
+      lastName: '',
+      twitter: '',
+      jobTitle: '',
+      email: ''
+    }
+  };
   handleChange = event => {
     this.setState({
       form: {
@@ -35,6 +40,11 @@ class BadgeNew extends React.Component {
         loading: false,
         error: null
       });
+      // Las propiedades que recibe este componente son del router
+      // Recibe history, location y match
+      // Al hacer un push a history nos redirecciona a la ruta indicada
+      // console.log(this.props);
+      this.props.history.push('/badges');
     } catch (error) {
       this.setState({
         loading: false,
@@ -44,6 +54,10 @@ class BadgeNew extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return <PageLoading/>
+    }
+
     return (
       <React.Fragment>
         <div className="BadgeNew__hero">
@@ -62,7 +76,7 @@ class BadgeNew extends React.Component {
                 avatar={avatar}/>
             </div>
             <div className="col-6">
-              <BadgeForm onSubmit={this.handleSubmit} onChange={this.handleChange} formValues={this.state.form}/>
+              <BadgeForm error={this.state.error} onSubmit={this.handleSubmit} onChange={this.handleChange} formValues={this.state.form}/>
             </div>
           </div>
         </div>
