@@ -20,12 +20,14 @@ export class BadgesList extends Component {
           // Para saber en si el elemento cambia de estado
           return (
             <div className="badge__card" key={badge.id}>
-              <Gravatar className="badge__avatar" email={badge.email}/>
-              <div className="badgeList-info">
-                <p className="badgeList-info">{badge.firstName} {badge.lastName}</p>
-                <p className="badge__twitter">@{badge.twitter}</p>
-                <p className="badge_info">{badge.jobTitle}</p>
-              </div>
+              <Link className="text-reset text-decoration-none" to={`/badges/${badge.id}/edit`}>
+                <Gravatar className="badge__avatar" email={badge.email}/>
+              </Link>
+                <div className="badgeList-info">
+                  <p className="badgeList-info">{badge.firstName} {badge.lastName}</p>
+                  <p className="badge__twitter">@{badge.twitter}</p>
+                  <p className="badge_info">{badge.jobTitle}</p>
+                </div>
             </div>
           )
         })}

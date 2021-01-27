@@ -1,12 +1,13 @@
 import  React from "react";
-import './styles/BadgeNew.css';
+import './styles/BadgeEdit.css';
 import logo from '../images/badge-header.svg';
 import Badge from "../components/Badge";
 import avatar from '../images/avatar.jpg';
 import BadgeForm from '../components/BadgeForm';
 import PageLoading from '../components/PageLoading';
 import api from '../api';
-class BadgeNew extends React.Component {
+
+class BadgeEdit extends React.Component {
   state = {
     loading: false,
     error: null,
@@ -35,21 +36,31 @@ class BadgeNew extends React.Component {
     });
 
     try {
-      await api.badges.create(this.state.form);
+      await api.badges.update(this.props.match.params.badgeId, this.state.form);
       this.setState({
         loading: false,
         error: null
       });
-      // Las propiedades que recibe este componente son del router
-      // Recibe history, location y match
-      // Al hacer un push a history nos redirecciona a la ruta indicada
-      // console.log(this.props);
       this.props.history.push('/badges');
     } catch (error) {
       this.setState({
         loading: false,
         error
       });
+    }
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = async _ => {
+    this.setState({ loading: true, error: null});
+    try {
+      const data = await api.badges.read(this.props.match.params.badgeId);
+      this.setState({ loading: false, form: data});
+    } catch (error) {
+      this.setState({ loading: false, error});
     }
   }
 
@@ -60,7 +71,7 @@ class BadgeNew extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="BadgeNew__hero">
+        <div className="BadgeEdit__hero">
           <img src={logo} alt="Logo" className="img-fluid"/>
         </div>
 
@@ -76,7 +87,7 @@ class BadgeNew extends React.Component {
                 avatar={avatar}/>
             </div>
             <div className="col-6">
-              <h1>New Attendant</h1>
+              <h1>Edit Attendant</h1>
               <BadgeForm error={this.state.error} onSubmit={this.handleSubmit} onChange={this.handleChange} formValues={this.state.form}/>
             </div>
           </div>
@@ -86,4 +97,4 @@ class BadgeNew extends React.Component {
   }
 }
 
-export default BadgeNew;
+export default BadgeEdit;
