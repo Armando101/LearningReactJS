@@ -1,11 +1,11 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
 import confLogo from '../images/platziconf-logo.svg';
 import Badge from '../components/Badge';
 import { Link } from 'react-router-dom';
 import './styles/BadgeDetail.css';
+import DeleteBadgeModal from '../components/DeleteBadgeModal';
 
-function BadgeDetails({badge}) {
+function BadgeDetails({badge, onCloseModal, onOpenModal, modalIsOpen, onDeleteBadge}) {
   return (
     <React.Fragment>
       <div className="BadgeDetails__hero">
@@ -34,13 +34,11 @@ function BadgeDetails({badge}) {
             <div>
               <div><Link className="btn btn-primary mb-4" to={`/badges/${badge.id}/edit`}>Edit</Link></div>
               <div>
-                <button className="btn btn-danger">Delete</button>
-                  {/* Create portal recibe dos argumentos, qué queremos renderizar y dónde lo queremos renderizar
-                  Los portales nos ayudan a renderizar un elemento fuera del nodo principal de la aplicación*/}
-                {ReactDOM.createPortal(
-                  <h1>Hola, realmente no estoy aquí</h1>,
-                  document.getElementById('modal'))
-                }
+                <button onClick={onOpenModal} className="btn btn-danger">Delete</button>
+                  <DeleteBadgeModal
+                    isOpen={modalIsOpen}
+                    onClose={onCloseModal}
+                    onDeleteBadge={onDeleteBadge}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit, aperiam voluptatem rem, accusantium ad molestiae tempore nisi repudiandae expedita saepe quis, aliquid praesentium inventore veritatis placeat optio. Ullam, neque minima.</DeleteBadgeModal>
               </div>
             </div>
           </div>
