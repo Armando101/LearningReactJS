@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom';
 import confLogo from '../images/platziconf-logo.svg';
 import Badge from '../components/Badge';
 import { Link } from 'react-router-dom';
@@ -32,7 +33,15 @@ function BadgeDetails({badge}) {
             <h2>Actions</h2>
             <div>
               <div><Link className="btn btn-primary mb-4" to={`/badges/${badge.id}/edit`}>Edit</Link></div>
-              <div><button className="btn btn-danger">Delete</button></div>
+              <div>
+                <button className="btn btn-danger">Delete</button>
+                  {/* Create portal recibe dos argumentos, qué queremos renderizar y dónde lo queremos renderizar
+                  Los portales nos ayudan a renderizar un elemento fuera del nodo principal de la aplicación*/}
+                {ReactDOM.createPortal(
+                  <h1>Hola, realmente no estoy aquí</h1>,
+                  document.getElementById('modal'))
+                }
+              </div>
             </div>
           </div>
           </div>
