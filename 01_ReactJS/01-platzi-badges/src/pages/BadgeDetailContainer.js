@@ -36,7 +36,7 @@ export class BadgeDetailContainer extends Component {
   }
 
   handleDeleteBadge = async _ => {
-    this.state({ loading: true, error: null});
+    this.setState({ loading: true, error: null});
 
     try {
       await api.badges.remove(this.props.match.params.badgeId);
