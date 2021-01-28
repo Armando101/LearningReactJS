@@ -16,7 +16,7 @@ export class Badges extends Component {
     this.state = {
       loading: true,
       error: null,
-      data: []
+      data: undefined
     };
   }
 

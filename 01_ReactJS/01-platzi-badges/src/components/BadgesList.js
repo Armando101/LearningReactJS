@@ -20,7 +20,7 @@ export class BadgesList extends Component {
           // Para saber en si el elemento cambia de estado
           return (
             <div className="badge__card" key={badge.id}>
-              <Link className="text-reset text-decoration-none" to={`/badges/${badge.id}/edit`}>
+              <Link className="text-reset text-decoration-none" to={`/badges/${badge.id}`}>
                 <Gravatar className="badge__avatar" email={badge.email}/>
               </Link>
                 <div className="badgeList-info">
