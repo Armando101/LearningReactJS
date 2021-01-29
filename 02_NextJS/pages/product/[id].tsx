@@ -5,7 +5,7 @@ import Navbar from '../../components/Navbar/Navbar';
 const ProductItem = () => {
   // const router = useRouter();
   const { query: { id } } = useRouter();
-  const [productList, setProductList] = useState<TProduct>({});
+  const [productList, setProductList] = useState<TProduct>();
 
   useEffect(() => {
     window.fetch(`/api/avo/${id}`)
