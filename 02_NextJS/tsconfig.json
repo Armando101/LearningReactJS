@@ -4,6 +4,9 @@
     "paths": {
       "@database": [
         "database/db.ts"
+      ],
+      "@components/*": [
+        "components/*"
       ]
     },
     "target": "es6",

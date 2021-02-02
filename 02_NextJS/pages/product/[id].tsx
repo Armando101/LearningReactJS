@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from '@components/Navbar/Navbar';
 
 const ProductItem = () => {
   // const router = useRouter();
