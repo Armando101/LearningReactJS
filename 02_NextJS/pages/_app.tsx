@@ -4,6 +4,13 @@ import Layout from "@components/Layout/Layout";
 // Importamos los archivos css globales
 // import '../styles.css';
 
+// Para generar un reporte 
+// export function reportWebVitals(metric) {
+//   console.log(metric)
+
+//   // Esto es útil para enviar las metricas a herramientas de análisi de datos
+// }
+
 function MyApp({ Component, pageProps }: AppProps) {
   // Providers -Context/Providers, Theme, data
   return (
