@@ -1,9 +1,11 @@
 import React from 'react'
+import '../assets/styles/components/Header.scss';
+const logo = "assets/img/logo-platzi-video-BW2.png";
 
 const Header = () => {
   return (
     <header className="header">
-      <img className="header__img" src="../assets/logo-platzi-video-BW2.png" alt="Platzi Video"/>
+      <img className="header__img" src={logo} alt="Platzi Video"/>
       <div className="header__menu">
         <div className="header__menu--profile">
           <img src="../assets/user-icon.png" alt=""/>
