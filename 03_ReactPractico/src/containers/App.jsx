@@ -7,9 +7,10 @@ import CarouselItem from '../components/CarouselItem';
 import Footer from '../components/Footer';
 
 import '../assets/styles/App.scss';
+const API = 'http://localhost:3000/initalState';
 
 const App = () => {
-  const [ videos, setVideos ] = useState([]);
+  const [ videos, setVideos ] = useState({ mylist: [], trends: [], originals: [] });
 
   useEffect(() => {
     fetch(API)
@@ -17,34 +18,30 @@ const App = () => {
       .then(data => setVideos(data));
   }, []);
 
-  console.log(videos);
+  console.log('videos', videos);
 
   return (
     <React.Fragment>
       <Header/>
       <Search/>
-
-      <Categories title="Mi lista">
-        <Carousel>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-        </Carousel>
-      </Categories>
+      {videos.mylist.length > 0 &&
+        <Categories title="Mi lista">
+          <Carousel>
+            <CarouselItem/>
+          </Carousel>
+        </Categories>
+      }
       
       <Categories title="tendencias">
         <Carousel>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
+          {videos.trends.map(item => {
+            return <CarouselItem key={item.id} {...item}/>
+          })}
         </Carousel>
-      </Categories>
+      </Categories> 
 
       <Categories title="Originales">
         <Carousel>
-          <CarouselItem/>
           <CarouselItem/>
         </Carousel>
       </Categories>
