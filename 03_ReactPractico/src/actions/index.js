@@ -4,6 +4,7 @@
 export const actions = {
   setFavorite: 'SET_FAVORITE',
   deleteFavorite: 'DELETE_FAVORITE',
+  loginRequest: 'LOGIN_REQUEST',
 };
 
 export const setFavorite = (payload) => ({
@@ -13,5 +14,10 @@ export const setFavorite = (payload) => ({
 
 export const deleteFavorite = (payload) => ({
   type: 'DELETE_FAVORITE',
+  payload,
+});
+
+export const loginRequest = (payload) => ({
+  type: 'LOGIN_REQUEST',
   payload,
 });

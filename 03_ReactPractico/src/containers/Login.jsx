@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { loginRequest} from '../actions/index';
 import googleIcon from '../assets/static/google-icon.png';
 import twitterIcon from '../assets/static/twitter-icon.png';
 import '../assets/styles/components/Login.scss';
 
-const Login = () => {
+const Login = (props) => {
   const [form, setForm] = useState({
     email: ''
   });
@@ -18,6 +20,11 @@ const Login = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    props.loginRequest(form);
+
+    // Histoy viene por defecto en las props, esto porque el componete está encapsulado
+    // en el browserRouter
+    props.history.push('/');
   }
 
   return (
@@ -57,4 +64,8 @@ const Login = () => {
   )
 }
 
-export default Login
+const mapDispatchProps = {
+  loginRequest
+}
+
+export default connect(null, mapDispatchProps)(Login);
