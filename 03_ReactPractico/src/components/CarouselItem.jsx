@@ -9,7 +9,7 @@ import plusIcon from '../assets/static/plus-icon.png';
 import removeIcon from '../assets/static/remove-icon.png';
 
 const CarouselItem = (props) => {
-  const { id, cover, title, year, contentRating, duration } = props;
+  const { id, cover, title, year, contentRating, duration, isList } = props;
   const handleSetFavorite = () => {
     // Ejecuta la función setFavorite y automáticamente la dispara el reducer
     props.setFavorite({
@@ -29,14 +29,17 @@ const CarouselItem = (props) => {
             <img className="carousel-item__details--img"
               src={playIcon}
               alt="Play Icon"/>
-            <img className="carousel-item__details--img"
-            src={plusIcon}
-            alt="Plus Icon" 
-            onClick={handleSetFavorite}/> 
-            <img className="carousel-item__details--img"
-            src={removeIcon}
-            alt="Remove icon" 
-            onClick={handleDelteFavorite}/> 
+            {isList ?
+              <img className="carousel-item__details--img"
+              src={removeIcon}
+              alt="Remove icon" 
+              onClick={handleDelteFavorite}/>
+              :
+              <img className="carousel-item__details--img"
+              src={plusIcon}
+              alt="Plus Icon" 
+              onClick={handleSetFavorite}/> 
+            }
           </div>
           <p className="carousel-item__details--title">{title}</p>
           <p className="carousel-item__details--subtitle">{`${year} ${contentRating} ${duration}`}</p>
