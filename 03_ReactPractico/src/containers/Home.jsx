@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
@@ -7,52 +7,52 @@ import CarouselItem from '../components/CarouselItem';
 import '../assets/styles/App.scss';
 import Header from '../components/Header';
 
-const Home = ({ myList, trends, originals}) => {
+const Home = ({ myList, trends, originals }) => {
   return (
     <>
-      <Header/>
-      <Search/>
-      {myList.length > 0 &&
+      <Header />
+      <Search isHome />
+      {myList.length > 0 && (
         <Categories title="Mi lista">
           <Carousel>
-            {myList.map(item => {
-              return <CarouselItem key={item.id} {...item} isList/>
+            {myList.map((item) => {
+              return <CarouselItem key={item.id} {...item} isList />;
             })}
           </Carousel>
         </Categories>
-      }
-      
-      {trends.length > 0 &&
+      )}
+
+      {trends.length > 0 && (
         <Categories title="Tendencias">
           <Carousel>
-            {trends.map(item => {
-              return <CarouselItem key={item.id} {...item}/>
-            })}
-          </Carousel>
-        </Categories> 
-      }
-      
-      {originals.length > 0 &&
-        <Categories title="Originales">
-          <Carousel>
-            {originals.map(item => {
-              return <CarouselItem key={item.id} {...item}/>
+            {trends.map((item) => {
+              return <CarouselItem key={item.id} {...item} />;
             })}
           </Carousel>
         </Categories>
-      }
+      )}
+
+      {originals.length > 0 && (
+        <Categories title="Originales">
+          <Carousel>
+            {originals.map((item) => {
+              return <CarouselItem key={item.id} {...item} />;
+            })}
+          </Carousel>
+        </Categories>
+      )}
     </>
-  )
-}
+  );
+};
 
 // Traemos los datos que necesitamos del estado
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     myList: state.myList,
     trends: state.trends,
-    originals: state.originals
-  }
-}
+    originals: state.originals,
+  };
+};
 
 // Indicamos que el componente Home va a recibir como promiedades lo que me retorna mapSatateToProps
 // En este caso las acciones van a ser null
