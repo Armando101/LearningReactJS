@@ -7,11 +7,20 @@ import CarouselItem from '../components/CarouselItem';
 import '../assets/styles/App.scss';
 import Header from '../components/Header';
 
-const Home = ({ myList, trends, originals }) => {
+const Home = ({ myList, trends, originals, searchQuery }) => {
   return (
     <>
       <Header />
       <Search isHome />
+      {searchQuery?.length > 0 && (
+        <Categories title="Relacionado">
+          <Carousel>
+            {searchQuery.map((item) => {
+              return <CarouselItem key={item.id} {...item} />;
+            })}
+          </Carousel>
+        </Categories>
+      )}
       {myList.length > 0 && (
         <Categories title="Mi lista">
           <Carousel>
@@ -51,6 +60,7 @@ const mapStateToProps = (state) => {
     myList: state.myList,
     trends: state.trends,
     originals: state.originals,
+    searchQuery: state.searchQuery
   };
 };
 

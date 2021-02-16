@@ -39,6 +39,16 @@ const reducer = (state, action) => {
             []
         ),
       };
+    case actions.searchVideo:
+      if (action.payload === '') return { ...state, searchQuery: [] };
+      const allMovies = [...state.trends, ...state.originals];
+
+      return {
+        ...state,
+        searchQuery: allMovies.filter((item) =>
+          item.title.toLowerCase().includes(action.payload.toLowerCase())
+        ),
+      };
     default:
       return state;
   }
