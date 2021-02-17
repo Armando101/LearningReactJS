@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -9,17 +10,18 @@ module.exports = {
       template: 'src/index.html',
     }),
   ],
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      '@api': path.resolve(__dirname, 'api/'),
+    },
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
+        loader: 'babel-loader',
       },
     ],
   },
