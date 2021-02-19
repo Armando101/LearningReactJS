@@ -4,6 +4,7 @@ import { Item, List } from './styles';
 
 export const ListOfCategories = () => {
   const [categories, setCategories] = useState([]);
+  const [showFixed, setShowFixed] = useState(false);
 
   useEffect(() => {
     fetch('https://petgram-server-edsf8xpy2.now.sh/categories')
@@ -13,8 +14,18 @@ export const ListOfCategories = () => {
     // Este arreglo pude terner configuraciones de cuándo se tiene que ejecutar
   }, []);
 
-  return (
-    <List>
+  useEffect(() => {
+    const onScroll = (_) => {
+      const newShowFixed = window.scrollY > 200;
+      showFixed !== newShowFixed && setShowFixed(newShowFixed);
+    };
+    document.addEventListener('scroll', onScroll);
+    return () => document.removeEventListener('scroll', onscroll);
+    // Indicamos que cada que cambie showFixed se va a ejecutar el evento
+  }, [showFixed]);
+
+  const renderList = (fixed) => (
+    <List className={fixed ? 'fixed' : ''}>
       {categories.map((category) => {
         return (
           <Item key={category.id}>
@@ -23,5 +34,12 @@ export const ListOfCategories = () => {
         );
       })}
     </List>
+  );
+
+  return (
+    <>
+      {renderList()}
+      {showFixed && renderList(true)}
+    </>
   );
 };
