@@ -2,17 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Category } from '../Category';
 import { Item, List } from './styles';
 
-export const ListOfCategories = () => {
+function useCategoriesData() {
   const [categories, setCategories] = useState([]);
-  const [showFixed, setShowFixed] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     fetch('https://petgram-server-edsf8xpy2.now.sh/categories')
       .then((response) => response.json())
-      .then((data) => setCategories(data));
-    // El array vacío como segundo parámetro significa que sólo se va a ejecutar al montar el componente
-    // Este arreglo pude terner configuraciones de cuándo se tiene que ejecutar
+      .then((data) => {
+        setCategories(data);
+        setLoading(false);
+      });
   }, []);
+  return { categories, loading };
+}
+
+export const ListOfCategories = () => {
+  const { categories, loading } = useCategoriesData();
+  const [showFixed, setShowFixed] = useState(false);
 
   useEffect(() => {
     const onScroll = (_) => {
@@ -25,14 +32,20 @@ export const ListOfCategories = () => {
   }, [showFixed]);
 
   const renderList = (fixed) => (
-    <List className={fixed ? 'fixed' : ''}>
-      {categories.map((category) => {
-        return (
-          <Item key={category.id}>
-            <Category {...category} />
-          </Item>
-        );
-      })}
+    <List fixed={fixed}>
+      {loading ? (
+        <Item key="loading">
+          <Category />
+        </Item>
+      ) : (
+        categories.map((category) => {
+          return (
+            <Item key={category.id}>
+              <Category {...category} />
+            </Item>
+          );
+        })
+      )}
     </List>
   );
 
