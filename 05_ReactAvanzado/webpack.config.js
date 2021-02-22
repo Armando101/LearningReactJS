@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   output: {
     filename: 'app.bundle.js',
+    publicPath: '/',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -27,5 +28,11 @@ module.exports = {
         loader: 'babel-loader',
       },
     ],
+  },
+  mode: 'development',
+  devServer: {
+    historyApiFallback: {
+      disableDotRule: true,
+    },
   },
 };
