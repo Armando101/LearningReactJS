@@ -16,8 +16,11 @@ export const App = () => {
         <PhotoCardWithQuery id={detailId} />
       ) : (
         <Router>
-          <Home path="/" id={detailId} />
-          <Home path="/pet/:id" id={detailId} />
+          {/* Podemos omitir el id={detailId}
+          Por defecto al hacer /:id ya pasa una prop llamada id
+          <Home path="/" id={detailId} /> */}
+          <Home path="/" />
+          <Home path="/pet/:id" />
         </Router>
       )}
     </div>
