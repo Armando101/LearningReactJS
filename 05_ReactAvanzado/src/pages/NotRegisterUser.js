@@ -1,15 +1,12 @@
 import React from 'react';
 import Context from '../Context';
+import { UserForm } from '@components/UserForm';
 
 export default function NotRegisterUser() {
   return (
     <Context.Consumer>
-      {({ isAuth, activateAuth }) => {
-        return (
-          <form onSubmit={activateAuth}>
-            <button>Iniciar sesión</button>
-          </form>
-        );
+      {({ activateAuth }) => {
+        return <UserForm onSumbit={activateAuth} />;
       }}
     </Context.Consumer>
   );
