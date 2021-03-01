@@ -17,7 +17,6 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
-    ,
   </Context.Provider>,
   document.getElementById('app')
 );
