@@ -6,7 +6,12 @@ export default function NotRegisterUser() {
   return (
     <Context.Consumer>
       {({ activateAuth }) => {
-        return <UserForm onSumbit={activateAuth} />;
+        return (
+          <>
+            <UserForm title="Registrarse" onSumbit={activateAuth} />
+            <UserForm title="Iniciar Sesión" onSumbit={activateAuth} />
+          </>
+        );
       }}
     </Context.Consumer>
   );
