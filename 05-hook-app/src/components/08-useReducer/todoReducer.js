@@ -9,7 +9,7 @@ export function toDoReducer(state, action) {
 
 export const initialState = [
   {
-    id: new Date().getTime,
+    id: new Date().getTime(),
     desc: "Learn React",
     done: false,
   },
