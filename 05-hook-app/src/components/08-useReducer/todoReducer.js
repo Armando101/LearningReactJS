@@ -14,3 +14,8 @@ export const initialState = [
     done: false,
   },
 ];
+
+export const init = () => {
+  const stateSaved = JSON.parse(localStorage.getItem("todos"));
+  return stateSaved || initialState;
+};

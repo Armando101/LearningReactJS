@@ -1,14 +1,19 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { useForm } from "../../hooks/useForm";
 import "./styles.css";
-import { initialState, toDoReducer } from "./todoReducer";
+import { init, toDoReducer } from "./todoReducer";
 
 export const TodoApp = () => {
-  const [todos, dispatch] = useReducer(toDoReducer, initialState);
+  const [todos, dispatch] = useReducer(toDoReducer, [], init);
 
   const [{ description: desc }, handleChange, reset] = useForm({
     description: "",
   });
+
+  useEffect(() => {
+    const todosSaved = JSON.stringify(todos);
+    localStorage.setItem("todos", todosSaved);
+  }, [todos]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
