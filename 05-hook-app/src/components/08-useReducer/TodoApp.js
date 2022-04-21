@@ -1,6 +1,8 @@
 import { useEffect, useReducer } from "react";
 import { useForm } from "../../hooks/useForm";
+import { NewTask } from "./NewTask";
 import "./styles.css";
+import { TodoList } from "./TodoList";
 import { init, toDoReducer } from "./todoReducer";
 
 export const TodoApp = () => {
@@ -43,46 +45,17 @@ export const TodoApp = () => {
       <hr />
       <div className="row">
         <div className="col-7">
-          <ul className="list-group list-group-flush">
-            {todos.map((item, index) => {
-              return (
-                <li className="list-group-item" key={index}>
-                  <p
-                    onClick={() => onDone(item.id)}
-                    className={`text-center ${item.done && "completed"}`}
-                  >
-                    {index + 1}. {item.desc}
-                  </p>
-                  <button
-                    onClick={() => onDelete(item.id)}
-                    className="btn btn-danger"
-                  >
-                    Delete
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+          <TodoList todos={todos} onDelete={onDelete} onDone={onDone} />
         </div>
 
         <div className="col-5">
           <h4>Add task</h4>
           <hr />
-          <form onSubmit={handleSubmit}>
-            <input
-              className="form-control"
-              type="text"
-              name="description"
-              placeholder="Learn..."
-              autoComplete="off"
-              onChange={handleChange}
-              value={desc}
-            />
-
-            <button className="btn btn-outline-primary btn-block mt-3">
-              Add new Task
-            </button>
-          </form>
+          <NewTask
+            desc={desc}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </div>
     </div>
