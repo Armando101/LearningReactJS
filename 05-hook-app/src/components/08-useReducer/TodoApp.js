@@ -29,6 +29,14 @@ export const TodoApp = () => {
     dispatch({ type: "ADD", payload: task });
   };
 
+  const onDelete = (id) => {
+    dispatch({ type: "DELETE", payload: id });
+  };
+
+  const onDone = (id) => {
+    dispatch({ type: "DONE", payload: id });
+  };
+
   return (
     <div>
       <h1>TodoApp ({todos.length})</h1>
@@ -39,10 +47,18 @@ export const TodoApp = () => {
             {todos.map((item, index) => {
               return (
                 <li className="list-group-item" key={index}>
-                  <p className="text-center">
+                  <p
+                    onClick={() => onDone(item.id)}
+                    className={`text-center ${item.done && "completed"}`}
+                  >
                     {index + 1}. {item.desc}
                   </p>
-                  <button className="btn btn-danger">Delete</button>
+                  <button
+                    onClick={() => onDelete(item.id)}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </button>
                 </li>
               );
             })}

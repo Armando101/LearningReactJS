@@ -13,6 +13,6 @@ p {
   justify-content: space-between;
 }
 
-.complete {
+.completed {
   text-decoration: line-through;
 }
