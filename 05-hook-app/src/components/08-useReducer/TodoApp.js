@@ -1,5 +1,4 @@
 import { useEffect, useReducer } from "react";
-import { useForm } from "../../hooks/useForm";
 import { NewTask } from "./NewTask";
 import "./styles.css";
 import { TodoList } from "./TodoList";
@@ -8,27 +7,13 @@ import { init, toDoReducer } from "./todoReducer";
 export const TodoApp = () => {
   const [todos, dispatch] = useReducer(toDoReducer, [], init);
 
-  const [{ description: desc }, handleChange, reset] = useForm({
-    description: "",
-  });
-
   useEffect(() => {
     const todosSaved = JSON.stringify(todos);
     localStorage.setItem("todos", todosSaved);
   }, [todos]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!desc) {
-      return;
-    }
-    const task = {
-      id: new Date().getTime(),
-      desc,
-      done: false,
-    };
-    reset();
-    dispatch({ type: "ADD", payload: task });
+  const handleAddTodo = (newTodo) => {
+    dispatch({ type: "ADD", payload: newTodo });
   };
 
   const onDelete = (id) => {
@@ -51,11 +36,7 @@ export const TodoApp = () => {
         <div className="col-5">
           <h4>Add task</h4>
           <hr />
-          <NewTask
-            desc={desc}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
+          <NewTask handleAddTodo={handleAddTodo} />
         </div>
       </div>
     </div>

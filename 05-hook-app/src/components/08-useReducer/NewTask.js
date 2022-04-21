@@ -1,4 +1,24 @@
-export const NewTask = ({ handleSubmit, handleChange, desc }) => {
+import { useForm } from "../../hooks/useForm";
+
+export const NewTask = ({ handleAddTodo }) => {
+  const [{ description: desc }, handleChange, reset] = useForm({
+    description: "",
+  });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!desc) {
+      return;
+    }
+    const task = {
+      id: new Date().getTime(),
+      desc,
+      done: false,
+    };
+    reset();
+    handleAddTodo(task);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <input
