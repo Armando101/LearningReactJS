@@ -27,7 +27,10 @@ export const init = () => {
 function markAsDone(data, id) {
   return data.map((todo) => {
     if (todo.id === id) {
-      todo.done = !todo.done;
+      return {
+        ...todo,
+        done: !todo.done,
+      };
     }
     return todo;
   });
